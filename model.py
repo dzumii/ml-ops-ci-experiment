@@ -21,9 +21,9 @@ def plot_predictions(train_data, train_labels,  test_data, test_labels,  predict
   # Set grids
   plt.grid(which='major', c='#cccccc', linestyle='--', alpha=0.5)
   # Some text
-  plt.title('Model Results', family='Arial', fontsize=14)
-  plt.xlabel('X axis values', family='Arial', fontsize=11)
-  plt.ylabel('Y axis values', family='Arial', fontsize=11)
+  plt.title('Model Results', fontsize=14)
+  plt.xlabel('X axis values', fontsize=11)
+  plt.ylabel('Y axis values', fontsize=11)
   # Show
   plt.savefig('model_results.png', dpi=120)
 
@@ -33,7 +33,7 @@ def mae(y_test, y_pred):
   """
   Calculuates mean absolute error between y_test and y_preds.
   """
-  return tf.metrics.mean_absolute_error(y_test, y_pred)
+  return tf.reduce_mean(tf.abs(y_test - y_pred))
   
 
 def mse(y_test, y_pred):
@@ -96,8 +96,8 @@ plot_predictions(train_data=X_train, train_labels=y_train,  test_data=X_test, te
 
 
 # Calculate model_1 metrics
-mae_1 = np.round(float(mae(y_test, y_preds.squeeze()).numpy()), 2)
-mse_1 = np.round(float(mse(y_test, y_preds.squeeze()).numpy()), 2)
+mae_1 = np.round(float(mae(y_test, y_preds.squeeze())), 2)
+mse_1 = np.round(float(mse(y_test, y_preds.squeeze())), 2)
 print(f'\nMean Absolute Error = {mae_1}, Mean Squared Error = {mse_1}.')
 
 # Write metrics to file
