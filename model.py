@@ -34,6 +34,9 @@ y_train = y[:40].reshape(-1, 1)
 X_test = X[40:].reshape(-1, 1)
 y_test = y[40:].reshape(-1, 1)
 
+print(y_test.shape)
+print(y_preds.shape)
+
 # Set random seed
 tf.random.set_seed(42)
 
@@ -55,6 +58,7 @@ y_preds = model.predict(X_test)
 plot_predictions(X_train, y_train, X_test, y_test, y_preds)
 
 # Calculate model metrics
+print(mse(y_test, y_preds.squeeze()))
 mae_1 = np.round(float(mae(y_test, y_preds.squeeze())), 2)
 mse_1 = np.round(float(mse(y_test, y_preds.squeeze())), 2)
 print(f'\nMean Absolute Error = {mae_1}, Mean Squared Error = {mse_1}.')
