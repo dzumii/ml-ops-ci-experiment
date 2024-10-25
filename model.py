@@ -34,9 +34,6 @@ y_train = y[:40].reshape(-1, 1)
 X_test = X[40:].reshape(-1, 1)
 y_test = y[40:].reshape(-1, 1)
 
-print(y_test.shape)
-print(y_preds.shape)
-
 # Set random seed
 tf.random.set_seed(42)
 
@@ -55,6 +52,10 @@ model.fit(X_train, y_train, epochs=100)
 
 # Make and plot predictions for model
 y_preds = model.predict(X_test)
+
+# Print the shape of y_preds after defining it
+print(y_preds.shape)
+
 plot_predictions(X_train, y_train, X_test, y_test, y_preds)
 
 # Calculate model metrics
