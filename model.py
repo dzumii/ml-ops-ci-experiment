@@ -19,8 +19,10 @@ def mae(y_test, y_pred):
     return tf.reduce_mean(tf.abs(y_test - y_pred))
 
 def mse(y_test, y_pred):
-    return tf.reduce_mean(tf.keras.metrics.mean_squared_error(y_test, y_pred))
-
+    mse_metric = tf.keras.metrics.MeanSquaredError()  # Instantiate the metric
+    mse_metric.update_state(y_test, y_pred)  # Update the state
+    return mse_metric.result().numpy()
+    
 # Check Tensorflow version
 print(tf.__version__)
 
