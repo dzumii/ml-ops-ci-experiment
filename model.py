@@ -71,4 +71,4 @@ with open('metrics.txt', 'w') as outfile:
     outfile.write(f'Mean Absolute Error = {mae_value}, Mean Squared Error = {mse_1}.')
 
 # Save the model
-model.save('my_model.h5')
+model.save('my_model.keras')
