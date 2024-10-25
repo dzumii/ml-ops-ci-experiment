@@ -61,12 +61,15 @@ y_train = y[:40]
 X_test = X[40:] # last 10 examples (20% of data)
 y_test = y[40:]
 
+# Reshape the data to be 2D
+X_train = X_train.reshape(-1, 1)
+y_train = y_train.reshape(-1, 1)
+X_test = X_test.reshape(-1, 1)
+y_test = y_test.reshape(-1, 1)
 
-# Take a single example of X
-input_shape = X[0].shape 
-
-# Take a single example of y
-output_shape = y[0].shape
+# Update input shape to reflect the correct dimension
+input_shape = X_train[0].shape
+output_shape = y_train[0].shape
 
 
 # Set random seed
