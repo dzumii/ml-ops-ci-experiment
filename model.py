@@ -19,7 +19,7 @@ def mae(y_test, y_pred):
     return tf.reduce_mean(tf.abs(y_test - y_pred))
 
 def mse(y_test, y_pred):
-    return tf.keras.metrics.mean_squared_error(y_test, y_pred)
+    return tf.reduce_mean(tf.keras.metrics.mean_squared_error(y_test, y_pred))
 
 # Check Tensorflow version
 print(tf.__version__)
@@ -59,14 +59,14 @@ print(y_preds.shape)
 plot_predictions(X_train, y_train, X_test, y_test, y_preds)
 
 # Calculate model metrics
-print(mse(y_test, y_preds.squeeze()))
-mae_1 = np.round(float(mae(y_test, y_preds.squeeze())), 2)
-mse_1 = np.round(float(mse(y_test, y_preds.squeeze())), 2)
-print(f'\nMean Absolute Error = {mae_1}, Mean Squared Error = {mse_1}.')
+mse_value = mse(y_test, y_preds.squeeze())
+mae_value = np.round(float(mae(y_test, y_preds.squeeze())), 2)
+mse_1 = np.round(float(mse_value), 2)  # Use mse_value for conversion to float
+print(f'\nMean Absolute Error = {mae_value}, Mean Squared Error = {mse_1}.')
 
 # Write metrics to file
 with open('metrics.txt', 'w') as outfile:
-    outfile.write(f'Mean Absolute Error = {mae_1}, Mean Squared Error = {mse_1}.')
+    outfile.write(f'Mean Absolute Error = {mae_value}, Mean Squared Error = {mse_1}.')
 
 # Save the model
 model.save('my_model.h5')
